@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic Example — Networked-Aframe</title>
+    <meta name="description" content="Basic Example — Networked-Aframe">
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script src="easyrtc/easyrtc.js"></script>
+    <script src="https://unpkg.com/networked-aframe@^0.6.0/dist/networked-aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js" ></script>
+    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+    <script src="/js/spawn-in-circle.component.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+   
+  
+    
+    <!-- link avatargenerator.js -->
+    
+  </head>
+  <body>
+    <a-scene networked-scene="
+      room: basic;
+      debug: true;
+    ">
+      
+        
+    
+      <a-assets>
+       
+      <a-asset-item id="bird" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2FTouchscreen%20Tabletglb.glb?1552597185614"></a-asset-item>
+      <a-asset-item id="secondone"  response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="clo" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fcloudanimfixed.glb?1553496353433"></a-asset-item>
+      <a-asset-item id="cx" response-type="arraybuffer" src="https://cdn.glitch.com/31a289fd-2df1-409b-bfc3-6a0faa911032%2Ffloorglb.glb?1553488568958"></a-asset-item>
+      <a-asset-item id="cv" response-type="arraybuffer" src="https://cdn.glitch.com/31a289fd-2df1-409b-bfc3-6a0faa911032%2Fnewnewsfeedglb.glb?1553488676937"></a-asset-item>
+      <a-asset-item id="cb" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fcouch.glb?1553489228769"></a-asset-item>
+      <a-asset-item id="cc" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fnewpics.glb?1553490204115"></a-asset-item>
+      <a-asset-item id="ac" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fcloudpt3zippedwavatar.glb?1553490905091"></a-asset-item> 
+      
+      <a-asset-item id="ab" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fshechillin.glb?1553495535939"></a-asset-item> 
+      <a-asset-item id="acdc" response-type="arraybuffer" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2FGalleryGLB.glb?1553479476803"></a-asset-item> 
+        
+        
+      </a-assets>
+      <a-entity gltf-model="#acdc" posisition="0 -30 0" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#ab" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+     
+      <a-entity gltf-model="#ac" position="-70 0 1"                      scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#cc" position="-27 0 0 1"                scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#cb" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#cv" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#cx" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#clo" position="0 50 0" rotation="-105 0 0"   scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#secondone" scale="0.1 0.1 0.1" animation-mixer="loop: pingpong"></a-entity>
+      <a-entity gltf-model="#bird"   position="1 0 1"                      scale="0.01 0.01 0.01" animation-mixer="loop: pingpong"></a-entity>
+      
+        
+        <img id="sky" src="https://cdn.glitch.com/ff60e0a0-203e-4cef-aba1-6d6e06bc902c%2Fuserinterfacerender3_0088.png?1551135353926" crossorigin="anonymous" />
+
+        <!-- Templates -->
+            <a-box color="#6CB4D8" position="-5 2 -5" rotation="0 90 60" scale="2 2 2">
+        <a-animation attribute="position" to="-5.2 2 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="200" to="2.3 2.3 2.3"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="200" to="2 2 2"></a-animation>
+        <a-animation attribute="rotation" begin="mouseenter" dur="2000" to="405 360 45"></a-animation>
+      
+      </a-box>
+        <!-- Avatar -->
+      <!-- avatargenerator.js -->
+        <!--leave empty -->
+        <template id="avatar-template">
+          <a-entity class="avatar">
+            
+            <a-sphere class="head"
+              color="#5985ff"
+              scale="0.45 0.5 0.4"
+              random-color
+            ></a-sphere>
+            <a-entity class="face"
+              position="0 0.05 0"
+            >
+              <a-sphere class="eye"
+                color="#efefef"
+                position="0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+              <a-sphere class="eye"
+                color="#efefef"
+                position="-0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>  
+             </a-entity> 
+          </a-entity>
+        </template>
+
+      
+      
+        <a-box position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+                event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
+                event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
+      <a-text id="cylinderText" value="
+                                       _
+___$$$$$$$$_____$$$$$$$$
+_$$$$$$$$$$$$_$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$
+_$$$$$$$$$$$$$$$$$$$$$$$$$
+__$$$$$$$$$$$$$$$$$$$$$$$
+____$$$$$$$$$$$$$$$$$$$
+_______$$$$$$$$$$$$$
+__________$$$$$$$
+____________$$$
+_____________$
+" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
+              geometry="primitive: plane; height:5; width: 5" ></a-text>
+    </a-box>
+      <a-camera>
+      <a-cursor></a-cursor>
+    </a-camera>
+        <!-- /Templates -->
+     
+
+      <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera position="0 1.6 0" spawn-in-circle="radius:3" wasd-controls look-controls>
+        <a-sphere class="head"
+          visible="false"
+          random-color
+        ></a-sphere>
+      </a-entity>
+
+      <a-entity position="0 0 0"
+       
+        material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
+
+      <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
+      <a-entity light="color: #ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
+
+      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+      <a-entity id="particles" particle-system="preset: snow"></a-entity>
+    </a-scene>
+    <script src="avatargenerator.js"></script>
+    <script>
+      // On mobile remove elements that are resource heavy
+      var isMobile = AFRAME.utils.device.isMobile();
+
+      if (isMobile) {
+        var particles = document.getElementById('particles');
+        particles.parentNode.removeChild(particles);
+      }
+      
+      // Define custom schema for syncing avatar color, set by random-color
+      NAF.schemas.add({
+        template: '#avatar-template',
+        components: [
+          'position',
+          'rotation',
+          {
+            selector: '.head',
+            component: 'material',
+            property: 'color'
+          }
+        ]
+      });
+    
+    </script>
+  </body>
+</html>
